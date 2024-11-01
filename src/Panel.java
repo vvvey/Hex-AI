@@ -143,11 +143,14 @@ public class Panel extends JPanel {
 		board[y][x]=turn;
 		drawBoard();
 
-		if (((MCAI)ai).calcVal(board)>Math.pow(board.length, 2)) {
+		int computer = ai.getPlayerCode();
+		int human = computer==2 ? 1 : 2;
+
+		if (((MCAI)ai).hasWon(board, computer)) {
 			JOptionPane.showMessageDialog(null, "The computer won. You didn't.", "Victory!", JOptionPane.PLAIN_MESSAGE);
 			turn=-1;
 			return;
-		} else if (new MCAI(colour).calcVal(board)>Math.pow(board.length, 2)) {
+		} else if (new MCAI(colour).hasWon(board, human)) {
 			JOptionPane.showMessageDialog(null, "You won.", "Victory!", JOptionPane.PLAIN_MESSAGE);
 			turn=-1;
 			return;

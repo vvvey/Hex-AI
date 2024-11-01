@@ -3,6 +3,7 @@
  */
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 /**
  * Represents a location on a standard Hex board.
@@ -113,8 +114,13 @@ public class Location {
 	 *
 	 * @return true if the two have the same coordinates, else false
 	 */
-	public boolean equals(Location l) {
-		return (x==l.x && y==l.y);
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) return true; 
+		if (obj == null || getClass() != obj.getClass()) return false; 
+
+		Location location = (Location) obj; 
+    	return x == location.x && y == location.y; 
 	}
 
 	/**
@@ -122,7 +128,18 @@ public class Location {
 	 *
 	 * @return A String describing this Location
 	 */
+	@Override
 	public String toString() {
 		return "("+x+", "+y+")";
+	}
+	
+	/**
+	 * Gets a hash code for this Location.
+	 *
+	 * @return A hash code for this Location
+	 */
+	@Override
+	public int hashCode() {
+		return Objects.hash(x,y);
 	}
 }
